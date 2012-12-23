@@ -1,0 +1,6 @@
+{
+    'Berlusconi I': {'start': '2001-06-11', 'end': '2005-04-23'},
+    'Berlusconi II': {'start': '2005-04-23', 'end': '2006-05-17'},
+    'Prodi': {'start': '2006-05-17', 'end': '2008-05-08'},
+    'Berlusconi III': {'start': '2008-05-08', 'end': '2011-11-16'}
+}

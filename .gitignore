@@ -1,1 +1,5 @@
 node_modules
+bootstrap/
+d3.v2.js
+jasmine/
+jquery.js
