@@ -1,7 +1,7 @@
-original link: http://www.istat.it/it/charts/speseprevid
-context link: http://www.istat.it/it/assistenza-e-previdenza
-description: spese per prestazioni degli enti previdenziali
-time span: 2000 2009
-frequency: year
-text description: monotonically increasing
-source: istat
+original link= http://www.istat.it/it/charts/speseprevid
+context link= http://www.istat.it/it/assistenza-e-previdenza
+description= spese per prestazioni degli enti previdenziali
+time span= 2000 2009
+frequency= year
+text description= monotonically increasing
+source= istat

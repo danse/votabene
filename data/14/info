@@ -1,5 +1,5 @@
-context link: http://appsso.eurostat.ec.europa.eu/nui/
-description: Gross Domestic Product
-time span: 1996 2012
-frequency: year
-source: eurostat
+context link= http://appsso.eurostat.ec.europa.eu/nui/
+description= Gross Domestic Product
+time span= 1996 2012
+frequency= year
+source= eurostat
