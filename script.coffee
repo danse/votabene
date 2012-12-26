@@ -1,6 +1,6 @@
 padding = 20;
-height = 300;
-width = 800;
+height = 400;
+width = 1300;
 excluded = [2, 14]
 log = (m) ->
   if console?
@@ -23,7 +23,7 @@ class Chart
   line: (d) ->
     domain = d3.extent(d, (d) -> d[1])
     y = d3.scale.linear().domain(domain).range([height-padding, padding])
-    x = d3.scale.linear().domain([1997, 2015]).range([padding, width-padding])
+    x = d3.scale.linear().domain([2000, 2015]).range([padding, width-padding])
     line = d3.svg.line()
       .y((d) => y(d[1]))
       .x((d) => x(Number(d[0])))
