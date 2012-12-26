@@ -4,6 +4,8 @@
   <meta charset="utf-8">
   <title>Vota bene!</title>
   <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Lemon" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Playball" rel="stylesheet" type="text/css">
   <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
   <style>
   	* {
@@ -22,10 +24,28 @@
     path.bad { stroke: red; }
     path:hover { opacity: 1; }
     div.container { margin-top: 100px; }
+    div#message { text-align: center; }
+    div#mainmessage {
+        text-transform: uppercase;
+        font-family: lemon;
+        font-size: 64px;
+        height: 64px;
+    }
+    div#submessage {
+        font-family: playball;
+        font-size: 18px;
+        color: green;
+    }
   </style>
 </head>
 <body>
-<div id="main" class="container">
+<div class="container">
+    <div id="message">
+        <div id="mainmessage">Vota bene!</div>
+        <div id="submessage">e viviamo meglio...</div>
+    </div>
+    <div id="main">
+    </div>
 </div>
 <script type="text/javascript" src="d3.v2.js"></script>
 <script type="text/javascript" src="jquery.js"></script>
