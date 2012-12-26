@@ -22,7 +22,7 @@ class Chart
 
   line: (d) ->
     domain = d3.extent(d, (d) -> d[1])
-    y = d3.scale.linear().domain(domain).range([padding, height-padding])
+    y = d3.scale.linear().domain(domain).range([height-padding, padding])
     x = d3.scale.linear().domain([1997, 2015]).range([padding, width-padding])
     line = d3.svg.line()
       .y((d) => y(d[1]))

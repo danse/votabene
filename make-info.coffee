@@ -1,7 +1,12 @@
 iniparser = require './node-iniparser'
 fs = require 'fs'
 
-excluded = [2, 14]
+excluded = [
+  2,
+  4, # breaks the y range
+  10, # breaks the y range
+  14 # not JSON
+  ]
 allInfo = []
 for i in [1..14]
   if i not in excluded
