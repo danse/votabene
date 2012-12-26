@@ -3,6 +3,7 @@ fs = require 'fs'
 
 excluded = [
   2,
+  3, # unexpected trend
   4, # breaks the y range
   10, # breaks the y range
   14 # not JSON
