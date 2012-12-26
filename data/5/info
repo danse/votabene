@@ -1,6 +1,7 @@
 original link= http://www.istat.it/it/charts/debitopubblico
 context link= http://www.istat.it/it/conti-nazionali
 description= debito pubblico in percentuale del PIL
+class = bad
 time span= 2001 2011
 frequency= year
 source= istat

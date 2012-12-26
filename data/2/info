@@ -1,6 +1,7 @@
 original link= http://www.istat.it/it/charts/immatricolati
 context link= http://www.istat.it/it/istruzione-e-formazione
 description= tasso di passaggio all'università
+class = good
 time span= 2002 2009
 frequency= year
 text description= monotonically decreasing

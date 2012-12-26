@@ -1,6 +1,7 @@
 original link= http://www.istat.it/it/charts/impreseindustria
 context link= http://www.istat.it/it/industria-e-costruzioni
 description= numero di imprese dell'industria e costruzioni
+class = good
 time span= 2004 2009
 frequency= year
 source= istat
