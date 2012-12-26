@@ -9,22 +9,14 @@ log = (m) ->
 class Chart
 
   constructor: (selector) ->
-    @processed = []
-    @ranges = []
-    @requestCounter = 0
-    @datasets = []
-    @received = []
 
     selector = selector or 'body'
     @svg = d3.select(selector).append('svg')
       .attr('width', width)
       .attr('height', height)
 
-  require: ->
-    for i in [1..14]
-      if i not in excluded
-        d3.json("/data/#{ i }/original.json", (data) => @draw(data))
-        @requestCounter += 1
+  load: ->
+    d3.json('info', (data) => @handle(data))
 
   detach: -> $(@svg.node).detach()
 
@@ -37,10 +29,14 @@ class Chart
       .x((d) => x(Number(d[0])))
     line(d)
 
-  draw: (data) ->
-    @received.push(data)
-    body = data.body
-    log body
+  handle: (@data) ->
+    for index in @data
+      @draw(index)
+
+  draw: (index) ->
     @svg.append('path')
-      .datum(body)
+      .datum(index.data.body)
+      .attr('class', index.class)
       .attr('d', (d) => @line(d))
+      .append('title')
+        .text(index.description)

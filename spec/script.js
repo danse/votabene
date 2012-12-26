@@ -11,21 +11,21 @@ describe("Chart", function() {
 
   it("can compute a correct line", function() {
     var d = chart.line([['12', '2003'], ['11', '2004']]);
-    expect(d).toBe('M1997.72,2009.6766666666667L1997.66,2009.68');
+    expect(d).toBe('M-83791.11111111111,20L-83833.33333333333,280');
   });
 
   it("should load everything and draw", function() {
 
     runs(function(){
-      chart.require();
+      chart.load();
     });
 
     waitsFor(function(){
-      return chart.received.length == chart.requestCounter;
-    }, 'receiving all requested data', 1000);
+      return chart.data !== undefined;
+    }, 'receiving data', 1000);
 
     runs(function(){
-      expect($('path').length).toBe(chart.requestCounter);
+      expect($('path').length).toBe(chart.data.length);
     });
   });
 });
