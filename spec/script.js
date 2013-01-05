@@ -11,7 +11,7 @@ describe("Chart", function() {
 
   it("can compute a correct line", function() {
     var d = chart.line([['12', '2003'], ['11', '2004']]);
-    expect(d).toBe('M-166972,380L-167056,20');
+    expect(d).toBe('M-159020,360L-159100,20');
   });
 
   it("should load everything and draw", function() {
