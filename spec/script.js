@@ -25,7 +25,7 @@ describe("Chart", function() {
     }, 'receiving data', 1000);
 
     runs(function(){
-      expect($('path').length).toBe(chart.data.length);
+      expect($('path.line').length).toBe(chart.data.length);
     });
   });
 });
