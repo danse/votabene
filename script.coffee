@@ -30,7 +30,6 @@ class Chart
   line: (d) ->
     domain = d3.extent(d, (d) -> d[1])
     y = d3.scale.linear().domain(domain).range([height-2*padding, padding])
-    x = d3.scale.linear().domain([2000, 2015]).range([padding, width-padding])
     line = d3.svg.line()
       .y((d) => y(d[1]))
       .x((d) => @x(Number(d[0])))
@@ -41,9 +40,16 @@ class Chart
       @draw(index)
 
   draw: (index) ->
-    @svg.append('path')
-      .datum(index.data.body)
+    path = @svg.append('path')
       .attr('class', 'line ' + index.class)
-      .attr('d', (d) => @line(d))
-      .append('title')
+
+    path.append('title')
         .text(index.description)
+
+    # Attempt to add animation, not working
+    drawn = []
+    for year in index.data.body
+      drawn.push year
+      path.datum(drawn)
+      path.transition().duration(500)
+        .attr('d', (d) => @line(d))

@@ -37,13 +37,12 @@ Chart = (function() {
   };
 
   Chart.prototype.line = function(d) {
-    var domain, line, x, y,
+    var domain, line, y,
       _this = this;
     domain = d3.extent(d, function(d) {
       return d[1];
     });
     y = d3.scale.linear().domain(domain).range([height - 2 * padding, padding]);
-    x = d3.scale.linear().domain([2000, 2015]).range([padding, width - padding]);
     line = d3.svg.line().y(function(d) {
       return y(d[1]);
     }).x(function(d) {
@@ -65,10 +64,22 @@ Chart = (function() {
   };
 
   Chart.prototype.draw = function(index) {
-    var _this = this;
-    return this.svg.append('path').datum(index.data.body).attr('class', 'line ' + index["class"]).attr('d', function(d) {
-      return _this.line(d);
-    }).append('title').text(index.description);
+    var drawn, path, year, _i, _len, _ref, _results,
+      _this = this;
+    path = this.svg.append('path').attr('class', 'line ' + index["class"]);
+    path.append('title').text(index.description);
+    drawn = [];
+    _ref = index.data.body;
+    _results = [];
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      year = _ref[_i];
+      drawn.push(year);
+      path.datum(drawn);
+      _results.push(path.transition().duration(500).attr('d', function(d) {
+        return _this.line(d);
+      }));
+    }
+    return _results;
   };
 
   return Chart;
