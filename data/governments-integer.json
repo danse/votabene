@@ -1,6 +1,6 @@
-{
-    'Berlusconi I': {'start': 2001.4, 'end': 2005.3},
-    'Berlusconi II': {'start': 2005.3, 'end': 2006.4},
-    'Prodi': {'start': 2006.4, 'end': 2008.3},
-    'Berlusconi III': {'start': 2008.3, 'end': 2011.8}
-}
+[
+    {"responsible": "Berlusconi I", "start": 2001.4, "end": 2005.3},
+    {"responsible": "Berlusconi II", "start": 2005.3, "end": 2006.4},
+    {"responsible": "Prodi", "start": 2006.4, "end": 2008.3},
+    {"responsible": "Berlusconi III", "start": 2008.3, "end": 2011.8}
+]

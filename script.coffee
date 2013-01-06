@@ -23,13 +23,15 @@ class Chart
       .call(@axis)
 
   load: ->
-    d3.json('info', (data) => @handle(data))
+    d3.json('data/governments-integer.json', (data) => @handleGovernments(data))
 
   detach: -> $(@svg.node).detach()
 
-  line: (d) ->
+  yScale: (d) ->
     domain = d3.extent(d, (d) -> d[1])
-    y = d3.scale.linear().domain(domain).range([height-2*padding, padding])
+    d3.scale.linear().domain(domain).range([height-2*padding, padding])
+
+  line: (d, y) ->
     line = d3.svg.line()
       .y((d) => y(d[1]))
       .x((d) => @x(Number(d[0])))
@@ -38,6 +40,20 @@ class Chart
   handle: (@data) ->
     for index in @data
       @draw(index)
+
+  handleGovernments: (@governments) ->
+    @svg.selectAll('rect.responsible')
+      .data(@governments)
+      .enter()
+      .append('rect')
+      .attr('class', 'responsible')
+      .attr('y', padding)
+      .attr('height', height - 2*padding)
+      .attr('x', (d) => @x(d.start))
+      .attr('width', (d) => @x(d.end) - @x(d.start))
+      .append('title')
+        .text((d) -> d.responsible)
+    d3.json('info', (data) => @handle(data))
 
   draw: (index) ->
     path = @svg.append('path')
@@ -52,4 +68,13 @@ class Chart
       drawn.push year
       path.datum(drawn)
       path.transition().duration(500)
-        .attr('d', (d) => @line(d))
+        .attr('d', (d) => @line(d, @yScale(d)))
+
+    @axis = d3.svg.axis().scale(@yScale(index.data.body)).ticks(13)
+      .tickFormat(d3.format '0.0f')
+      .orient('left')
+    @axisSelection = @svg.append('g')
+      .attr('class', 'axis')
+      .attr('id', index.description)
+      .attr('transform', 'translate(' + (20+Number(padding)) + ', 0)')
+     #.call(@axis)

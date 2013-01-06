@@ -27,8 +27,8 @@ Chart = (function() {
 
   Chart.prototype.load = function() {
     var _this = this;
-    return d3.json('info', function(data) {
-      return _this.handle(data);
+    return d3.json('data/governments-integer.json', function(data) {
+      return _this.handleGovernments(data);
     });
   };
 
@@ -36,13 +36,17 @@ Chart = (function() {
     return $(this.svg.node).detach();
   };
 
-  Chart.prototype.line = function(d) {
-    var domain, line, y,
-      _this = this;
+  Chart.prototype.yScale = function(d) {
+    var domain;
     domain = d3.extent(d, function(d) {
       return d[1];
     });
-    y = d3.scale.linear().domain(domain).range([height - 2 * padding, padding]);
+    return d3.scale.linear().domain(domain).range([height - 2 * padding, padding]);
+  };
+
+  Chart.prototype.line = function(d, y) {
+    var line,
+      _this = this;
     line = d3.svg.line().y(function(d) {
       return y(d[1]);
     }).x(function(d) {
@@ -63,23 +67,38 @@ Chart = (function() {
     return _results;
   };
 
+  Chart.prototype.handleGovernments = function(governments) {
+    var _this = this;
+    this.governments = governments;
+    this.svg.selectAll('rect.responsible').data(this.governments).enter().append('rect').attr('class', 'responsible').attr('y', padding).attr('height', height - 2 * padding).attr('x', function(d) {
+      return _this.x(d.start);
+    }).attr('width', function(d) {
+      return _this.x(d.end) - _this.x(d.start);
+    }).append('title').text(function(d) {
+      return d.responsible;
+    });
+    return d3.json('info', function(data) {
+      return _this.handle(data);
+    });
+  };
+
   Chart.prototype.draw = function(index) {
-    var drawn, path, year, _i, _len, _ref, _results,
+    var drawn, path, year, _i, _len, _ref,
       _this = this;
     path = this.svg.append('path').attr('class', 'line ' + index["class"]);
     path.append('title').text(index.description);
     drawn = [];
     _ref = index.data.body;
-    _results = [];
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       year = _ref[_i];
       drawn.push(year);
       path.datum(drawn);
-      _results.push(path.transition().duration(500).attr('d', function(d) {
-        return _this.line(d);
-      }));
+      path.transition().duration(500).attr('d', function(d) {
+        return _this.line(d, _this.yScale(d));
+      });
     }
-    return _results;
+    this.axis = d3.svg.axis().scale(this.yScale(index.data.body)).ticks(13).tickFormat(d3.format('0.0f')).orient('left');
+    return this.axisSelection = this.svg.append('g').attr('class', 'axis').attr('id', index.description).attr('transform', 'translate(' + (20 + Number(padding)) + ', 0)');
   };
 
   return Chart;
