@@ -5,7 +5,9 @@ excluded = [
   2,
   3, # unexpected trend
   4, # breaks the y range
+  7, # trying to highlight coherent trends
   10, # breaks the y range
+  12, # trying to highlight coherent trends
   14 # not JSON
   ]
 allInfo = []
