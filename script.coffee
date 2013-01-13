@@ -1,7 +1,29 @@
 padding = 20;
 height = 400;
-width = 1000;
+width = 777;
 excluded = [2, 14]
+
+lineClassMap = {}
+
+indexUpdateSub = (event) ->
+  if event.type is 'mouseenter'
+    title = $(event.target).text()
+    text = 'indice: ' + title
+    cl = lineClassMap[title]
+  else
+    text = cl = ''
+  $('div#submessage').text(text)
+  $('div#submessage').attr('class', cl)
+
+responsibleUpdateSub = (event) ->
+  if event.type is 'mouseenter'
+    text = 'governo: ' + ($(event.target).text())
+    color = 'gray'
+  else
+    text = ''
+    color = ''
+  $('div#submessage').text(text).css('color', color)
+
 log = (m) ->
   if console?
     console.log(m)
@@ -54,6 +76,7 @@ class Chart
       .append('title')
         .text((d) -> d.responsible)
     d3.json('info', (data) => @handle(data))
+    $('rect.responsible').hover(responsibleUpdateSub);
 
   draw: (index) ->
     path = @svg.append('path')
@@ -61,6 +84,8 @@ class Chart
 
     path.append('title')
         .text(index.description)
+
+    lineClassMap[index.description] = index.class
 
     # Attempt to add animation, not working
     drawn = []
@@ -78,3 +103,6 @@ class Chart
       .attr('id', index.description)
       .attr('transform', 'translate(' + (20+Number(padding)) + ', 0)')
      #.call(@axis)
+
+    $('path.line').hover(indexUpdateSub);
+

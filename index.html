@@ -18,7 +18,7 @@
         stroke-width: 10px;
         fill: none;
         stroke-linecap: round;
-        opacity: 0.4;
+        opacity: 0.2;
     }
     path.good { stroke: green; }
     path.bad { stroke: red; }
@@ -30,6 +30,10 @@
         fill: whitesmoke;
         stroke-dasharray: 5, 15;
         stroke: gray;
+        opacity: 0.5;
+    }
+    rect.responsible:hover {
+        opacity: 1;
     }
     div.container { margin-top: 100px; }
     div#message { text-align: center; }
@@ -43,19 +47,44 @@
         font-family: playball;
         font-size: 18px;
         color: green;
+        white-space: pre;
+    }
+    div#submessage.good {color: green;}
+    div#submessage.bad {color: red;}
+    div.explaination {
+        margin-top: 100px;
     }
   </style>
 </head>
 <body>
 <a href="https://github.com/danse/votabene"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
 <div class="container">
-    <div id="message">
-        <div id="mainmessage">Vota bene!</div>
-        <div id="submessage">e vivi meglio...</div>
+    <div class="row">
+        <div class="span10">
+            <div id="message">
+                <div id="mainmessage">Vota bene!</div>
+                <div id="submessage">e vivi meglio...</div>
+            </div>
+            <div id="main">
+            </div>
+            <div id="disqus_thread" style="margin-top: 100px;"></div>
+        </div>
+        <div class="span2 explaination">
+            Questo è l'andamento di alcuni indici italiani negli ultimi anni, secondo i dati dell'ISTAT.
+            </br>
+            </br>
+            Ho colorato in rosso gli indici che vorrei avessero valori bassi,
+            in verde quelli che vorrei fossero aumentati, invece di diminuire
+            &hellip;
+            </br>
+            </br>
+            Purtroppo i dati sono etichettati semplicemente con un anno per
+            punto, quindi l'esatto andamento degli indici non è riportato
+            fedelmente da questi grafici. Questo può creare dubbi solo per quel
+            che riguarda la transizione attraverso il governo Prodi, perché per
+            il resto la responsabilità degli andamenti non è cambiata molto.
+        </div>
     </div>
-    <div id="main">
-    </div>
-    <div id="disqus_thread" style="margin-top: 100px;"></div>
 </div>
 <script type="text/javascript" src="d3.v2.js"></script>
 <script type="text/javascript" src="jquery.js"></script>
