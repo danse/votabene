@@ -1,8 +1,6 @@
-padding = 20;
-height = 400;
-width = 777;
-excluded = [2, 14]
-
+padding = 20
+height = 400
+width = 777
 lineClassMap = {}
 axisMap = {}
 
