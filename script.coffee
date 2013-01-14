@@ -4,16 +4,21 @@ width = 777;
 excluded = [2, 14]
 
 lineClassMap = {}
+axisMap = {}
 
 indexUpdateSub = (event) ->
   if event.type is 'mouseenter'
     title = $(event.target).text()
     text = 'indice: ' + title
     cl = lineClassMap[title]
+    display = ''
   else
+    title = $(event.target).text()
     text = cl = ''
+    display = 'none'
   $('div#submessage').text(text)
   $('div#submessage').attr('class', cl)
+  axisMap[title].transition().duration(200).style('display', display)
 
 responsibleUpdateSub = (event) ->
   if event.type is 'mouseenter'
@@ -102,7 +107,9 @@ class Chart
       .attr('class', 'axis')
       .attr('id', index.description)
       .attr('transform', 'translate(' + (20+Number(padding)) + ', 0)')
-     #.call(@axis)
+      .call(@axis)
+      .style('display', 'none')
 
+    axisMap[index.description] = @axisSelection
     $('path.line').hover(indexUpdateSub);
 
