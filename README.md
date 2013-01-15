@@ -15,3 +15,6 @@ There is a big mess in the repo due to the dependencies brutally copied in, but 
 And this one for the tests:
 
     spec/script.js
+
+Oh, and obviously, the `data` folder, and the `make-info.coffee` in order to
+prepare the data!
