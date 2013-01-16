@@ -20,7 +20,8 @@ indexUpdateSub = function(event) {
     display = '';
   } else {
     title = $(event.target).text();
-    text = cl = '';
+    text = '-';
+    cl = '';
     display = 'none';
   }
   $('div#submessage').text(text);
@@ -34,7 +35,7 @@ responsibleUpdateSub = function(event) {
     text = 'governo: ' + ($(event.target).text());
     color = 'gray';
   } else {
-    text = '';
+    text = '-';
     color = '';
   }
   return $('div#submessage').text(text).css('color', color);

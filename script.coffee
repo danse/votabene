@@ -12,7 +12,8 @@ indexUpdateSub = (event) ->
     display = ''
   else
     title = $(event.target).text()
-    text = cl = ''
+    text = '-'
+    cl = ''
     display = 'none'
   $('div#submessage').text(text)
   $('div#submessage').attr('class', cl)
@@ -23,7 +24,7 @@ responsibleUpdateSub = (event) ->
     text = 'governo: ' + ($(event.target).text())
     color = 'gray'
   else
-    text = ''
+    text = '-'
     color = ''
   $('div#submessage').text(text).css('color', color)
 
