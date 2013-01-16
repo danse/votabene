@@ -2,10 +2,11 @@ iniparser = require './node-iniparser'
 fs = require 'fs'
 
 excluded = [
-  4, # breaks the y range
-  10, # breaks the y range
-  12, # unemployment. out of trend, I'm reducing the number of reds
-  14 # not JSON
+  4, # detaineds (not so monotone)
+  7, # debit (not so monotone)
+  11, # exports (not so monotone)
+  12, # unemployment (not so monotone)
+  #14 # not JSON
   ]
 allInfo = []
 for i in [1..14]
