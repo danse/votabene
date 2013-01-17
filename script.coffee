@@ -55,7 +55,7 @@ class Chart
 
   yScale: (d) ->
     domain = d3.extent(d, (d) -> d[1])
-    d3.scale.linear().domain(domain).range([height-2*padding, padding])
+    d3.scale.linear().domain(domain).range([height-3*padding, 2*padding])
 
   line: (d, y) ->
     line = d3.svg.line()
@@ -105,7 +105,7 @@ class Chart
     @axisSelection = @svg.append('g')
       .attr('class', 'axis')
       .attr('id', index.description)
-      .attr('transform', 'translate(' + (20+Number(padding)) + ', 0)')
+      .attr('transform', 'translate(' + (30+Number(padding)) + ', 0)')
       .call(@axis)
       .style('display', 'none')
 

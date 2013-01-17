@@ -73,7 +73,7 @@ Chart = (function() {
     domain = d3.extent(d, function(d) {
       return d[1];
     });
-    return d3.scale.linear().domain(domain).range([height - 2 * padding, padding]);
+    return d3.scale.linear().domain(domain).range([height - 3 * padding, 2 * padding]);
   };
 
   Chart.prototype.line = function(d, y) {
@@ -132,7 +132,7 @@ Chart = (function() {
       });
     }
     this.axis = d3.svg.axis().scale(this.yScale(index.data.body)).ticks(13).tickFormat(d3.format('0.0f')).orient('left');
-    this.axisSelection = this.svg.append('g').attr('class', 'axis').attr('id', index.description).attr('transform', 'translate(' + (20 + Number(padding)) + ', 0)').call(this.axis).style('display', 'none');
+    this.axisSelection = this.svg.append('g').attr('class', 'axis').attr('id', index.description).attr('transform', 'translate(' + (30 + Number(padding)) + ', 0)').call(this.axis).style('display', 'none');
     axisMap[index.description] = this.axisSelection;
     return $('path.line').hover(indexUpdateSub);
   };
