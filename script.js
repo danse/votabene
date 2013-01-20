@@ -83,7 +83,7 @@ Chart = (function() {
       return y(d[1]);
     }).x(function(d) {
       return _this.x(Number(d[0]));
-    });
+    }).interpolate('cardinal').tension(0.9);
     return line(d);
   };
 

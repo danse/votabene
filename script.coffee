@@ -61,6 +61,8 @@ class Chart
     line = d3.svg.line()
       .y((d) => y(d[1]))
       .x((d) => @x(Number(d[0])))
+      .interpolate('cardinal')
+      .tension(0.9)
     line(d)
 
   handle: (@data) ->
