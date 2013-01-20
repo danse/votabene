@@ -55,7 +55,7 @@ class Chart
 
   yScale: (d) ->
     domain = d3.extent(d, (d) -> d[1])
-    d3.scale.linear().domain(domain).range([height-3*padding, 2*padding])
+    d3.scale.linear().domain(domain).range([height-2*padding, 2*padding])
 
   line: (d, y) ->
     line = d3.svg.line()
@@ -79,6 +79,15 @@ class Chart
       .attr('width', (d) => @x(d.end) - @x(d.start))
       .append('title')
         .text((d) -> d.responsible)
+    @svg.selectAll('line.elections')
+      .data(@governments.slice(1))
+      .enter()
+      .append('line')
+      .attr('class', 'elections')
+      .attr('y1', padding)
+      .attr('y2', height - padding)
+      .attr('x1', (d) => @x(d.start))
+      .attr('x2', (d) => @x(d.start))
     d3.json('info', (data) => @handle(data))
     $('rect.responsible').hover(responsibleUpdateSub);
 

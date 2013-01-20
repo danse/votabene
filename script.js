@@ -73,7 +73,7 @@ Chart = (function() {
     domain = d3.extent(d, function(d) {
       return d[1];
     });
-    return d3.scale.linear().domain(domain).range([height - 3 * padding, 2 * padding]);
+    return d3.scale.linear().domain(domain).range([height - 2 * padding, 2 * padding]);
   };
 
   Chart.prototype.line = function(d, y) {
@@ -108,6 +108,11 @@ Chart = (function() {
       return _this.x(d.end) - _this.x(d.start);
     }).append('title').text(function(d) {
       return d.responsible;
+    });
+    this.svg.selectAll('line.elections').data(this.governments.slice(1)).enter().append('line').attr('class', 'elections').attr('y1', padding).attr('y2', height - padding).attr('x1', function(d) {
+      return _this.x(d.start);
+    }).attr('x2', function(d) {
+      return _this.x(d.start);
     });
     d3.json('info', function(data) {
       return _this.handle(data);
