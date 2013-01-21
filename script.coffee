@@ -12,7 +12,7 @@ indexUpdateSub = (event) ->
     display = ''
   else
     title = $(event.target).text()
-    text = '-'
+    text = 'Andamento di alcuni indici italiani negli ultimi anni'
     cl = ''
     display = 'none'
   $('div#submessage').text(text)
@@ -24,7 +24,7 @@ responsibleUpdateSub = (event) ->
     text = 'governo: ' + ($(event.target).text())
     color = 'gray'
   else
-    text = '-'
+    text = 'Andamento di alcuni indici italiani negli ultimi anni'
     color = ''
   $('div#submessage').text(text).css('color', color)
 

@@ -20,7 +20,7 @@ indexUpdateSub = function(event) {
     display = '';
   } else {
     title = $(event.target).text();
-    text = '-';
+    text = 'Andamento di alcuni indici italiani negli ultimi anni';
     cl = '';
     display = 'none';
   }
@@ -35,7 +35,7 @@ responsibleUpdateSub = function(event) {
     text = 'governo: ' + ($(event.target).text());
     color = 'gray';
   } else {
-    text = '-';
+    text = 'Andamento di alcuni indici italiani negli ultimi anni';
     color = '';
   }
   return $('div#submessage').text(text).css('color', color);
