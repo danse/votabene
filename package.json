@@ -16,7 +16,7 @@
   "devDependencies": {},
   "optionalDependencies": {},
   "engines": {
-    "node": "*"
+    "node": "0.8.14"
   },
   "scripts": {
     "start": "node server"
