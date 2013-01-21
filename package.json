@@ -5,7 +5,7 @@
   "version": "0.0.0",
   "private": true,
   "homepage": "http://votabene.nodester.com",
-  "node": "0.8.1",
+  "node": "0.8.14",
   "repository": {
     "url": "defaultapp"
   },
