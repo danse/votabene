@@ -5,4 +5,4 @@ require('http').createServer(function (request, response) {
   request.addListener('end', function () {
     file.serve(request, response);
   });
-}).listen(36736);
+}).listen(process.env.PORT);
