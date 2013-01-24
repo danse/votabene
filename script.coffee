@@ -53,18 +53,6 @@ class Chart
 
   detach: -> $(@svg.node).detach()
 
-  yScale: (d) ->
-    domain = d3.extent(d, (d) -> d[1])
-    d3.scale.linear().domain(domain).range([height-2*padding, 2*padding])
-
-  line: (d, y) ->
-    line = d3.svg.line()
-      .y((d) => y(d[1]))
-      .x((d) => @x(Number(d[0])))
-      .interpolate('cardinal')
-      .tension(0.9)
-    line(d)
-
   handle: (@data) ->
     for index in @data
       @draw(index)
@@ -94,6 +82,13 @@ class Chart
     $('rect.responsible').hover(responsibleUpdateSub);
 
   draw: (index) ->
+    yScale = d3.scale.linear().range([height-2*padding, 2*padding])
+    line = d3.svg.line()
+      .x((d) => @x(Number(d[0])))
+      .y((d) -> yScale(d[1]))
+      .interpolate('cardinal')
+      .tension(0.9)
+
     path = @svg.append('path')
       .attr('class', 'line ' + index.class)
 
@@ -102,15 +97,17 @@ class Chart
 
     lineClassMap[index.description] = index.class
 
-    # Attempt to add animation, not working
-    drawn = []
-    for year in index.data.body
-      drawn.push year
-      path.datum(drawn)
-      path.transition().duration(500)
-        .attr('d', (d) => @line(d, @yScale(d)))
+    extent = d3.extent(index.data.body, (d) -> d[1])
+    yScale.domain(extent)
+    init = index.data.body[0][1] # initial value
+    zero = ([d[0], init] for d in index.data.body) # needed for animation
+    path.datum(zero).attr('d', line)
+    path.datum(index.data.body).transition()
+     #.duration(4000).ease('elastic')
+      .duration(4000)
+      .attr('d', line)
 
-    @axis = d3.svg.axis().scale(@yScale(index.data.body)).ticks(13)
+    @axis = d3.svg.axis().scale(yScale).ticks(13)
       .tickFormat(d3.format '0.0f')
       .orient('left')
     @axisSelection = @svg.append('g')

@@ -68,25 +68,6 @@ Chart = (function() {
     return $(this.svg.node).detach();
   };
 
-  Chart.prototype.yScale = function(d) {
-    var domain;
-    domain = d3.extent(d, function(d) {
-      return d[1];
-    });
-    return d3.scale.linear().domain(domain).range([height - 2 * padding, 2 * padding]);
-  };
-
-  Chart.prototype.line = function(d, y) {
-    var line,
-      _this = this;
-    line = d3.svg.line().y(function(d) {
-      return y(d[1]);
-    }).x(function(d) {
-      return _this.x(Number(d[0]));
-    }).interpolate('cardinal').tension(0.9);
-    return line(d);
-  };
-
   Chart.prototype.handle = function(data) {
     var index, _i, _len, _ref, _results;
     this.data = data;
@@ -121,22 +102,35 @@ Chart = (function() {
   };
 
   Chart.prototype.draw = function(index) {
-    var drawn, path, year, _i, _len, _ref,
+    var d, extent, init, line, path, yScale, zero,
       _this = this;
+    yScale = d3.scale.linear().range([height - 2 * padding, 2 * padding]);
+    line = d3.svg.line().x(function(d) {
+      return _this.x(Number(d[0]));
+    }).y(function(d) {
+      return yScale(d[1]);
+    }).interpolate('cardinal').tension(0.9);
     path = this.svg.append('path').attr('class', 'line ' + index["class"]);
     path.append('title').text(index.description);
     lineClassMap[index.description] = index["class"];
-    drawn = [];
-    _ref = index.data.body;
-    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-      year = _ref[_i];
-      drawn.push(year);
-      path.datum(drawn);
-      path.transition().duration(500).attr('d', function(d) {
-        return _this.line(d, _this.yScale(d));
-      });
-    }
-    this.axis = d3.svg.axis().scale(this.yScale(index.data.body)).ticks(13).tickFormat(d3.format('0.0f')).orient('left');
+    extent = d3.extent(index.data.body, function(d) {
+      return d[1];
+    });
+    yScale.domain(extent);
+    init = index.data.body[0][1];
+    zero = (function() {
+      var _i, _len, _ref, _results;
+      _ref = index.data.body;
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        d = _ref[_i];
+        _results.push([d[0], init]);
+      }
+      return _results;
+    })();
+    path.datum(zero).attr('d', line);
+    path.datum(index.data.body).transition().duration(4000).attr('d', line);
+    this.axis = d3.svg.axis().scale(yScale).ticks(13).tickFormat(d3.format('0.0f')).orient('left');
     this.axisSelection = this.svg.append('g').attr('class', 'axis').attr('id', index.description).attr('transform', 'translate(' + (30 + Number(padding)) + ', 0)').call(this.axis).style('display', 'none');
     axisMap[index.description] = this.axisSelection;
     return $('path.line').hover(indexUpdateSub);
