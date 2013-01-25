@@ -26,7 +26,7 @@ indexUpdateSub = function(event) {
   }
   $('div#submessage').text(text);
   $('div#submessage').attr('class', cl);
-  return axisMap[title].transition().duration(200).style('display', display);
+  return axisMap[title].transition().duration(300).style('display', display);
 };
 
 responsibleUpdateSub = function(event) {
@@ -59,8 +59,8 @@ Chart = (function() {
 
   Chart.prototype.load = function() {
     var _this = this;
-    return d3.json('data/governments-integer.json', function(data) {
-      return _this.handleGovernments(data);
+    return d3.json('data.json', function(data) {
+      return _this.handle(data);
     });
   };
 
@@ -69,28 +69,11 @@ Chart = (function() {
   };
 
   Chart.prototype.handle = function(data) {
-    var index, _i, _len, _ref, _results;
-    this.data = data;
-    _ref = this.data;
-    _results = [];
-    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-      index = _ref[_i];
-      _results.push(this.draw(index));
-    }
-    return _results;
-  };
-
-  Chart.prototype.handleGovernments = function(governments) {
-    var _this = this;
-    this.governments = governments;
-    return d3.json('info', function(data) {
-      return _this.handle(data);
-    });
-  };
-
-  Chart.prototype.draw = function(index) {
-    var d, extent, init, line, path, yScale, zero,
+    var index, _i, _len, _ref, _results,
       _this = this;
+    this.data = data;
+    this.governments = this.data[0];
+    this.data = this.data.slice(1);
     this.svg.selectAll('rect.responsible').data(this.governments).enter().append('rect').attr('class', 'responsible').attr('y', padding).attr('height', height - 2 * padding).attr('x', function(d) {
       return _this.x(d.start);
     }).attr('width', function(d) {
@@ -104,6 +87,18 @@ Chart = (function() {
       return _this.x(d.start);
     });
     $('rect.responsible').hover(responsibleUpdateSub);
+    _ref = this.data;
+    _results = [];
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      index = _ref[_i];
+      _results.push(this.draw(index));
+    }
+    return _results;
+  };
+
+  Chart.prototype.draw = function(index) {
+    var d, extent, init, line, path, yScale, zero,
+      _this = this;
     yScale = d3.scale.linear().range([height - 2 * padding, 2 * padding]);
     line = d3.svg.line().x(function(d) {
       return _this.x(Number(d[0]));

@@ -49,23 +49,15 @@ class Chart
       .call(@axis)
 
   load: ->
-    d3.json('data/governments-integer.json', (data) => @handleGovernments(data))
+    d3.json('data.json', (data) => @handle(data))
 
   detach: -> $(@svg.node).detach()
 
   handle: (@data) ->
-    for index in @data
-      @draw(index)
 
-  handleGovernments: (@governments) ->
-    /* Unfortunately, the governments must be drawn before the indexes in order
-     * to stay behind them */
-    d3.json('info', (data) => @handle(data))
-
-  draw: (index) ->
-    duration = 4000
-
-    /* Draw governments */
+    # Draw governments
+    @governments = @data[0]
+    @data = @data[1..]
     @svg.selectAll('rect.responsible')
       .data(@governments)
       .enter()
@@ -88,7 +80,12 @@ class Chart
       .attr('x2', (d) => @x(d.start))
     $('rect.responsible').hover(responsibleUpdateSub);
 
-    /* Draw indexes */
+    # Draw indexes
+    for index in @data
+      @draw(index)
+
+  draw: (index) ->
+
     yScale = d3.scale.linear().range([height-2*padding, 2*padding])
     line = d3.svg.line()
       .x((d) => @x(Number(d[0])))
@@ -111,7 +108,7 @@ class Chart
     path.datum(zero).attr('d', line)
     path.datum(index.data.body).transition()
      #.duration(duration).ease('elastic')
-      .duration(duration)
+      .duration(4000)
       .attr('d', line)
 
     @axis = d3.svg.axis().scale(yScale).ticks(13)
