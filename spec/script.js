@@ -9,13 +9,6 @@ describe("Chart", function() {
     chart.detach();
   });
 
-  it("can compute a correct line", function() {
-    var data = [['12', '2003'], ['11', '2004']]
-    var y = chart.yScale(data);
-    var d = chart.line(data, y);
-    expect(d).toBe('M-122076.33333333333,360L-122137.75,40');
-  });
-
   it("scales x values", function() {
     expect(chart.x(2002)).toBe(142.83333333333331);
     expect(chart.x(2002.5)).toBe(173.54166666666666);
