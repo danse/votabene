@@ -71,8 +71,16 @@
       chart.load();
   }
   setTimeout(function(){
-      $('.explaination').fadeIn().duration(3000)
-  }, 10000)
+      $('.explaination').fadeIn(3000);
+  }, 7000)
+  setTimeout(function(){
+     var disqus_shortname = 'votabene'; // required: replace example with your forum shortname
+     (function() {
+       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+       dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+     })();
+  }, 12000)
   </script>
 </head>
 <body>
@@ -91,13 +99,5 @@
     </div>
     <div id="disqus_thread" style="margin-top: 100px;"></div>
   </div>
-  <script type="text/javascript">
-    var disqus_shortname = 'votabene'; // required: replace example with your forum shortname
-    (function() {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-  </script>
   </body>
 </html>
