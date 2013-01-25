@@ -83,6 +83,14 @@ Chart = (function() {
   Chart.prototype.handleGovernments = function(governments) {
     var _this = this;
     this.governments = governments;
+    return d3.json('info', function(data) {
+      return _this.handle(data);
+    });
+  };
+
+  Chart.prototype.draw = function(index) {
+    var d, extent, init, line, path, yScale, zero,
+      _this = this;
     this.svg.selectAll('rect.responsible').data(this.governments).enter().append('rect').attr('class', 'responsible').attr('y', padding).attr('height', height - 2 * padding).attr('x', function(d) {
       return _this.x(d.start);
     }).attr('width', function(d) {
@@ -95,15 +103,7 @@ Chart = (function() {
     }).attr('x2', function(d) {
       return _this.x(d.start);
     });
-    d3.json('info', function(data) {
-      return _this.handle(data);
-    });
-    return $('rect.responsible').hover(responsibleUpdateSub);
-  };
-
-  Chart.prototype.draw = function(index) {
-    var d, extent, init, line, path, yScale, zero,
-      _this = this;
+    $('rect.responsible').hover(responsibleUpdateSub);
     yScale = d3.scale.linear().range([height - 2 * padding, 2 * padding]);
     line = d3.svg.line().x(function(d) {
       return _this.x(Number(d[0]));
