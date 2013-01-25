@@ -67,9 +67,10 @@
         font-size: 8pt;
         text-align: right;
     }
-    .fb-like {
-        float: left;
-        padding: 20px;
+    #social > * {
+        /* Mister google required this importance */
+        float: left !important;
+        margin: 20px !important;
     }
   </style>
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/d3/3.0.1/d3.v3.min.js "></script>
@@ -82,6 +83,7 @@
   }
   setTimeout(function(){
       $('.explaination').fadeIn(3000);
+      // Facebook
       (function(d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;
@@ -89,8 +91,17 @@
         js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
-  }, 2000)
+      // Twitter
+      !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+      // Google
+      (function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/plusone.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+      })();
+  }, 7000)
   setTimeout(function(){
+     // Disqus
      var disqus_shortname = 'votabene'; // required: replace example with your forum shortname
      (function() {
        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -115,7 +126,14 @@
       così difficile cambiare. Dati a cadenza annuale, fonte <a
       href="http://www.istat.it/it/">ISTAT</a> ed <a
       href="http://ec.europa.eu/eurostat/statistical-atlas/gis/viewer/">EUROSTAT</a>
-      <div class="fb-like" data-href="http://votabene.herokuapp.com" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true" data-font="arial"></div>
+      <div id="social">
+        <!-- Facebook -->
+        <div class="fb-like" data-href="http://votabene.herokuapp.com" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true" data-font="arial"></div>
+        <!-- Twitter -->
+        <a data-url="http://votabene.herokuapp.com" data-hashtags="votabene" href="https://twitter.com/share" class="twitter-share-button" data-lang="en">Tweet</a>
+        <!-- Google -->
+        <g:plusone href="http://votabene.herokuapp.com"></g:plusone>
+      </div>
     </div>
     <div id="disqus_thread" style="margin-top: 100px;"></div>
   </div>
