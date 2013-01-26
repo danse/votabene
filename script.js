@@ -55,6 +55,7 @@ Chart = (function() {
     this.x = d3.scale.linear().domain([2000, 2012]).range([padding, width - padding]);
     this.axis = d3.svg.axis().scale(this.x).ticks(13).tickFormat(d3.format('0'));
     this.axisSelection = this.svg.append('g').attr('class', 'axis').attr('transform', 'translate(0, ' + (height - padding) + ')').call(this.axis);
+    this.delay = 0;
   }
 
   Chart.prototype.load = function() {
@@ -124,7 +125,8 @@ Chart = (function() {
       return _results;
     })();
     path.datum(zero).attr('d', line);
-    path.datum(index.data.body).transition().duration(4000).attr('d', line);
+    path.datum(index.data.body).transition().duration(4000).delay(200 * this.delay).attr('d', line);
+    this.delay += 1;
     this.axis = d3.svg.axis().scale(yScale).ticks(13).tickFormat(d3.format('0.0f')).orient('left');
     this.axisSelection = this.svg.append('g').attr('class', 'axis').attr('id', index.description).attr('transform', 'translate(' + (30 + Number(padding)) + ', 0)').call(this.axis).style('display', 'none');
     axisMap[index.description] = this.axisSelection;

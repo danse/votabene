@@ -48,6 +48,8 @@ class Chart
       .attr('transform', 'translate(0, ' + (height - padding) + ')')
       .call(@axis)
 
+    @delay = 0
+
   load: ->
     d3.json('data.json', (data) => @handle(data))
 
@@ -109,7 +111,10 @@ class Chart
     path.datum(index.data.body).transition()
      #.duration(duration).ease('elastic')
       .duration(4000)
+      .delay(200 * @delay)
       .attr('d', line)
+
+    @delay += 1
 
     @axis = d3.svg.axis().scale(yScale).ticks(13)
       .tickFormat(d3.format '0.0f')
