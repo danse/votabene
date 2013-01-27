@@ -1,7 +1,7 @@
 # Votabene
 
 A visualization of some Italian indexes during the last governments, available
-at its heroku domain<http://votabene.herokuapp.com>.
+at its heroku domain <http://votabene.herokuapp.com>.
 
 More details, in Italian, on the github pages for this project:
 <http://danse.github.com/votabene/>.
