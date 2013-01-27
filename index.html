@@ -40,6 +40,10 @@
 
 <h2>Contribuire</h2>
 
+<h3>Diffondi il link!</h3>
+
+<p>Questa visualizzazione é molto semplice. Il suo scopo é di incuriosire la gente sui dati, ridurre il disinteresse e fare riflettere, ma non mi aspetto che un utente passi più di cinque minuti sulla pagina. Perché abbia un impatto serve quindi che venga diffusa, e visto che il tutto parte dal basso, ogni contributo é essenziale!</p>
+
 <h3>Nuovi set di dati</h3>
 
 <p>Tracciare i trend del nostro paese negli ultimi dieci anni è un'impresa piuttosto impegnativa. Purtroppo non sono riuscito a trovare tanti dati rilevanti quanti ne avrei voluti. Sarei felice se qualcuno mi aiutasse ad aggiungere data set. I requisiti sono:</p>
@@ -49,6 +53,28 @@
 <li>Andamento negativo, cioé crescente per gli indici positivi, decrescente per quelli negativi.</li>
 <li>Andamento monotono</li>
 </ul><p>L'obiettivo é individuare indici che aiutino a capire dove si é sbagliato, ma al di là della crisi. La crisi economica ha impatto peggiorativo su molti indici, ma é interessante notare che spesso non fa che accentuare una tendenza già presente.</p>
+
+<h4>Formato dei dati</h4>
+
+<p>Si può aggiungere facilmente al grafico qualsiasi dato che abbia il formato standard degli altri, e cioè:</p>
+
+<div class="highlight"><pre><span class="p">{</span><span class="nt">"body"</span><span class="p">:</span>
+  <span class="p">[[</span><span class="s2">"2000"</span><span class="p">,</span><span class="s2">"228"</span><span class="p">],[</span><span class="s2">"2001"</span><span class="p">,</span><span class="s2">"234"</span><span class="p">],[</span><span class="s2">"2002"</span><span class="p">,</span><span class="s2">"242"</span><span class="p">],[</span><span class="s2">"2003"</span><span class="p">,</span><span class="s2">"248"</span><span class="p">],[</span><span class="s2">"2004"</span><span class="p">,</span><span class="s2">"251"</span><span class="p">],[</span><span class="s2">"2005"</span><span class="p">,</span><span class="s2">"255"</span><span class="p">],[</span><span class="s2">"2006"</span><span class="p">,</span><span class="s2">"260"</span><span class="p">],[</span><span class="s2">"2007"</span><span class="p">,</span><span class="s2">"267"</span><span class="p">],[</span><span class="s2">"2008"</span><span class="p">,</span><span class="s2">"272"</span><span class="p">],[</span><span class="s2">"2009"</span><span class="p">,</span><span class="s2">"283"</span><span class="p">]]</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>Se nei files su github troverete roba in più non importa, l'importante é che questo non manchi.</p>
+
+<p>In ogni cartella coi dati (come ad esempio la <a href="https://github.com/danse/votabene/tree/master/data/6">6</a>), questo file ha nome <code>standard.json</code>. Bisognerebbe poi compilare anche un file <code>info</code>, con alcune informazioni che servono al grafico ed alcune che servono per mantenere i dati o trovarne altri:</p>
+
+<div class="highlight"><pre><span class="na">description</span> <span class="o">=</span> <span class="s">pressione fiscale (percentuale del PIL) # Descrizione mostrata nel grafico (unità di misura)</span>
+<span class="na">class</span> <span class="o">=</span> <span class="s">bad # (colore: rosso o verde? bad or good?)</span>
+<span class="na">original link</span><span class="o">=</span> <span class="s">http://www.istat.it/it/charts/pressionefiscale # Link da cui scaricare il file originale, per accelerare confronti ed aggiornamenti. Oppure un link più vicino possibile al punto dove scaricare il file.</span>
+<span class="na">context link</span><span class="o">=</span> <span class="s">http://www.istat.it/it/conti-nazionali # Link contestuale, che porti a questi dati ma magari anche ad altri simili interessanti. Questa non é una variabile importante, potete ometterla</span>
+<span class="na">source</span><span class="o">=</span> <span class="s">istat # Per comodità, ma si può omettere</span>
+</pre></div>
+
+<p>Infine, se portare i dati nel formato standard richiede parecchio lavoro, documentate la procedura, e in ogni caso aggiungete un file <code>original.json</code> nella cartella per facilitare verifiche, confronti, aggiornamenti.</p>
 
 <h3>Allineamento dei dati</h3>
 
