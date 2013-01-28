@@ -1,6 +1,6 @@
 padding = 20
 height = 400
-width = 777
+width = 940
 lineClassMap = {}
 axisMap = {}
 
