@@ -1,0 +1,6 @@
+context link= http://appsso.eurostat.ec.europa.eu/nui/
+description = Prodotto interno lordo (milioni di euro)
+class = good
+source= eurostat
+original link = http://epp.eurostat.ec.europa.eu/portal/page/portal/statistics/search_database
+notes = reference year 2005 (at 2005 exchange rate)

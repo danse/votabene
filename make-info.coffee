@@ -6,11 +6,11 @@ excluded = [
   7, # debit (not so monotone)
   11, # exports (not so monotone)
   12, # unemployment (not so monotone)
-  #14 # not JSON
+  16, # gross domestic product (not so monotone)
   ]
 data = []
 data.push JSON.parse(fs.readFileSync('data/governments-integer.json', 'utf-8'))
-for i in [1..15]
+for i in [1..16]
   if i not in excluded
     dir = "./data/#{ i }/"
     index = iniparser.parseSync dir + 'info'
