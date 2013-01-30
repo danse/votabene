@@ -1,8 +1,9 @@
-padding = 20
-height = 400
+padding = 35
+height = 450
 width = 940
 lineClassMap = {}
 axisMap = {}
+allAxis = {}
 
 indexUpdateSub = (event) ->
   if event.type is 'mouseenter'
@@ -127,5 +128,6 @@ class Chart
       .style('display', 'none')
 
     axisMap[index.description] = @axisSelection
+    allAxis[index.description.slice(0,5)] = @axis # for debug
     $('path.line').hover(indexUpdateSub);
 
